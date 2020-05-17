@@ -8,6 +8,7 @@
 #include "ledstrip.h"
 #include "state.h"
 #include "utils.h"
+#include "modes.h"
 
 namespace adapter {
 
@@ -25,7 +26,7 @@ namespace adapter {
         colour.setValue(utils::colourint2string(state::modeState[m].colour).c_str());
         random.setValue({boolean: state::modeState[m].random});
         speed.setValue({integer: (float)(state::modeState[m].speed*100)});
-        if (state::on) ledstrip::modeinit();
+        if (state::on) modes::init();
     }
     
     void begin() {
@@ -36,9 +37,9 @@ namespace adapter {
         onValue.boolean = state::on;
         on.setValue(onValue);
 
-        mode.propertyEnum = ledstrip::modes;
+        mode.propertyEnum = modes::modes;
         ThingPropertyValue modeValue;
-        modeValue.string = new String(ledstrip::modes[state::mode]);
+        modeValue.string = new String(modes::modes[state::mode]);
         mode.setValue(modeValue);
 
         colour.atType = "ColorProperty";
@@ -94,7 +95,7 @@ namespace adapter {
             Serial.print("on: ");
             Serial.println(state::on?"true":"false");
             state::save();
-            ledstrip::modeinit();
+            modes::init();
         }
 
         if (state::brightness != brightness.getValue().integer) {
@@ -105,7 +106,7 @@ namespace adapter {
             ledstrip::setBrightness(state::brightness);
         }
 
-        uint8_t newmode = utils::indexOf(ledstrip::modes, ledstrip::numberModes, *(mode.getValue().string));
+        uint8_t newmode = utils::indexOf(modes::modes, modes::numberModes, *(mode.getValue().string));
         if(newmode != state::mode) {
             Serial.print("mode: ");
             Serial.println(newmode);
@@ -120,7 +121,7 @@ namespace adapter {
             Serial.println(newcolour, HEX);
             state::colour(newcolour);
             state::save();
-            if (state::on) ledstrip::modeinit();
+            if (state::on) modes::init();
         }
 
         bool newrandom = random.getValue().boolean;
@@ -129,7 +130,7 @@ namespace adapter {
             Serial.println(newrandom ? "true" : "false");
             state::random(newrandom);
             state::save();
-            if (state::on) ledstrip::modeinit();
+            if (state::on) modes::init();
         }
 
         float newspeed = speed.getValue().integer/100.0;
@@ -138,11 +139,11 @@ namespace adapter {
             Serial.println(newspeed);
             state::speed(newspeed);
             state::save();
-            //if (state::on) ledstrip::modeinit();
+            //if (state::on) modes::init();
         }
 
         if (state::on) {
-            ledstrip::modestep();
+            modes::step();
         } else {
             ledstrip::fill(0x000000);
             ledstrip::show();

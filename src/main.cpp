@@ -6,7 +6,7 @@
 #include "wifi.h"
 #include "state.h"
 
-#define DELAY 0
+#define DELAY 5
 
 void setup() {
   Serial.begin(9600);
@@ -19,5 +19,5 @@ void setup() {
 
 void loop() {
   utils::sleep(DELAY);
-  adapter::loop();  
+  adapter::loop();
 }

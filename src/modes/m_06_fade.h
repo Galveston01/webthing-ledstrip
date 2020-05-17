@@ -1,10 +1,13 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 
 namespace m_fade {
 
+    char* title = "Fade";
+    state::ModeState defaultState {colour: 0x000000, random: false, speed: 0.9};
     uint8_t i;
     uint32_t c;
     uint32_t lastc;

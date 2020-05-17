@@ -1,9 +1,13 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 
 namespace m_static {
+
+    char* title = "Static";
+    state::ModeState defaultState {colour: 0xff0000, random: false, speed: 0.9};
     uint8_t i;
 
     void init() {

@@ -1,9 +1,13 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 
-namespace m_rainbow {
+namespace m_rainbowcycle {
+
+    char* title = "Rainbow Cycle";
+    state::ModeState defaultState {colour: 0x000000, random: false, speed: 0.9};
     uint8_t j;
 
     uint32_t Wheel(uint8_t WheelPos) {
@@ -24,8 +28,8 @@ namespace m_rainbow {
     }
 
     void step() {
-        for(uint8_t i=0; i<ledstrip::numPixels; i++) {
-            ledstrip::setPixelColor(i, Wheel(i+j));
+        for(uint16_t i = 0; i < ledstrip::numPixels; i++) {
+            ledstrip::setPixelColor(i, Wheel(((i * 256 / ledstrip::numPixels) + j) & 255));
         }
         ledstrip::show();
         utils::sleep(100*(1-state::speed()));

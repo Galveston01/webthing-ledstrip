@@ -1,10 +1,14 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 #include <limits.h>
 
 namespace m_chase {
+
+    char* title = "Chase";
+    state::ModeState defaultState {colour: 0x000000, random: false, speed: 0.9};
     uint32_t c;
     uint8_t numcolours = 3;
     uint32_t colours[] = {0xff0000, 0x00ff00, 0x0000ff};

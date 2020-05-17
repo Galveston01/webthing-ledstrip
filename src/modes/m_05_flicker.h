@@ -1,9 +1,13 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 
 namespace m_flicker {
+
+    char* title = "Flicker";
+    state::ModeState defaultState {colour: 0x000000, random: false, speed: 0.9};
 
     void init() {
     }
@@ -15,4 +19,4 @@ namespace m_flicker {
         ledstrip::show();
         utils::sleep(1000 * (1-state::speed()));
     }
-}
+} 

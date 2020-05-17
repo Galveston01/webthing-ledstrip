@@ -2,7 +2,7 @@
 
 #include <Arduino.h>
 #include <EEPROM.h>
-#include "ledstrip.h"
+#include "modes.h"
 
 namespace state {
 
@@ -11,7 +11,7 @@ namespace state {
         bool on;
         float brightness;
         uint8_t mode;
-        ModeState modeState[ledstrip::numberModes];
+        ModeState modeState[modes::numberModes];
     } s;
 
     bool &on = s.on;
@@ -22,13 +22,13 @@ namespace state {
     void begin() {
         EEPROM.begin(sizeof(s));
         EEPROM.get(0, s);
-        if (s.initialized != 0x7a5b89f04e651c6e) {
-            s.initialized = 0x7a5b89f04e651c6e;
+        if (s.initialized != 0x7a5b89f04e651c6f) {
+            s.initialized = 0x7a5b89f04e651c6f;
             s.on = true;
             s.brightness = 1;
             s.mode = 0;
-            for (uint8_t i = 0; i < ledstrip::numberModes; i++)
-                modeState[i] = {0xff0000, false, 0.9};
+            for (uint8_t i = 0; i < modes::numberModes; i++)
+                modeState[i] = modes::defaultState(i);
             save();
         }
     }

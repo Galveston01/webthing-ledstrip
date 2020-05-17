@@ -4,8 +4,6 @@
 
 namespace ledstrip {
 
-    const uint8_t numberModes = 13;
-    extern char* modes[numberModes+1];
     extern const uint16_t numPixels;
 
     void begin();
@@ -15,6 +13,4 @@ namespace ledstrip {
     void fill (uint32_t);
     void show();
     void setBrightness(float);
-    void modeinit();
-    void modestep();
 } 

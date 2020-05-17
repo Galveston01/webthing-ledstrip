@@ -1,9 +1,13 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 
 namespace m_stars {
+
+    char* title = "Stars";
+    state::ModeState defaultState {colour: 0xffff00, random: false, speed: 0.9};
     uint8_t b;
     uint8_t p;
     uint32_t c;
@@ -28,4 +32,4 @@ namespace m_stars {
         utils::sleep(10*(1-state::speed()));
         b--;
     }
-}
+} 

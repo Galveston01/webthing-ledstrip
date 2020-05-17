@@ -1,10 +1,13 @@
-#include "m_static.h"
+#pragma once
+
 #include "../utils.h"
 #include "../state.h"
 #include "../ledstrip.h"
 
 namespace m_smoothalternateblinking {
 
+    char* title = "Smooth Alternate Blinking";
+    state::ModeState defaultState {colour: 0xffffff, random: false, speed: 0.9};
     uint8_t i;
     uint8_t p;
     uint32_t c[2];
