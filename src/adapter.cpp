@@ -1,6 +1,6 @@
 #define LARGE_JSON_BUFFERS 1
-#define LARGE_JSON_DOCUMENT_SIZE 8092
-#define SMALL_JSON_DOCUMENT_SIZE 2048
+//#define LARGE_JSON_DOCUMENT_SIZE 8092
+//#define SMALL_JSON_DOCUMENT_SIZE 2048
 
 #include "adapter.h"
 #include "Thing.h"

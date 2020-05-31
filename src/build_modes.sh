@@ -43,6 +43,7 @@ do
 done
 
 cat <<EOF >> "$MODES_CPP"
+        nullptr,
     };
 
     void init() {

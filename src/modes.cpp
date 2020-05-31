@@ -29,6 +29,7 @@ namespace modes {
         m_alternateblinking::title, 
         m_smoothblinking::title, 
         m_smoothalternateblinking::title, 
+        nullptr,
     };
 
     void init() {
